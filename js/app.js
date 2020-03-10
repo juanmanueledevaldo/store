@@ -19,6 +19,10 @@ box.addEventListener(
     'click',
     addCandy
 );
+candyDeck.addEventListener(
+    'click',
+    addCandy
+)
 function addCandy(e) {
     var candy =e.target.alt
     var li = document.createElement('li');
@@ -29,7 +33,6 @@ function addCandy(e) {
     btnDel.appendChild(document.createTextNode('X'))
     li.appendChild(btnDel);
     list.appendChild(li);
-
 }
 it = 0;
 list.addEventListener(
@@ -75,10 +78,10 @@ function get() {
             it++;
             if (it < 5) {
                 art = `
-        <div id="top" class="col">
-            <div class="card-body col">
+        <div id="top" class="card-body">
+           
                 <a class='add'><img height="120" width="120" src="${product.picture}" alt="${product.name}"></a>
-            </div>
+           
         </div>
         `;
                 box.innerHTML += art;
@@ -89,7 +92,7 @@ function get() {
                 <h4 class="my-0 font-weight-normal">${product.name}</h4>
             </div>
             <div class="card-body">
-                <a ondblclick="dbl()"> <img height="240" width="240" src="${product.picture}" alt="${product.name}" ></a>
+                <a class='add'> <img height="240" width="240" src="${product.picture}" alt="${product.name}" ></a>
                     <p>${product.price} pesos</p>
             </div>
         </div>
