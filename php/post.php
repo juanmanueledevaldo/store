@@ -1,7 +1,8 @@
 <?php
 include ("conection.php");
-$candy = $_POST['uno'];
-$candy = json_decode($candy, true);
+header("Content-type: application/json; charset=utf-8");
+$input = json_decode(file_get_contents("php://input"), true);
+$candy = $input->Nombre;
 $datetime = date("Y/m/d");
 $status = 1;
 $query ="INSERT 

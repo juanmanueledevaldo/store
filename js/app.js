@@ -1,20 +1,15 @@
 
-get();
-var Merch;
+
 var list;
 list = document.getElementById('List');
-
 var it;
 var template;
 var card;
 var box;
-var art;
 var cuatro;
-var candyDeck;
+var uno;
 candyDeck = document.getElementById("Deck");
 box = document.getElementById("topBox");
-bax = document.getElementById("tapBox");
-var uno;
 box.addEventListener(
     'click',
     addCandy
@@ -23,10 +18,15 @@ candyDeck.addEventListener(
     'click',
     addCandy
 )
+var getForm = document.getElementById('form');
+getForm.addEventListener(
+    'submit',
+    post
+)
 function addCandy(e) {
-    var candy =e.target.alt
+    var candy = e.target.alt
     var li = document.createElement('li');
-    li.classList = 'list-grpup-item';
+    li.classList = 'list-grpup-item item';
     li.appendChild(document.createTextNode(candy));
     var btnDel = document.createElement('a');
     btnDel.classList = 'delete btn btn-sm';
@@ -34,7 +34,6 @@ function addCandy(e) {
     li.appendChild(btnDel);
     list.appendChild(li);
 }
-it = 0;
 list.addEventListener(
     'click',
     deleteCandy
@@ -48,57 +47,43 @@ function deleteCandy(e) {
         }
     }
 }
-function dbl(id) {
 
-    $url = './php/post.php';
-    uno = id;
-    fetch($url, {
-        method: 'POST',
-        body: JSON.stringify(uno),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then((response) => response.json())
-        .then((res) => {
-            console.log(res);
+function post(e) {
 
-        })
-        .catch((err) => {
-            console.log(err);
+    e.preventDefault;
+    list = list.children;
+    var elements;
+    elements = [
 
+    ]
+    for (let i = 0; i < list.length; i++) {
+        const element = {
+            Nombre: list[i].firstChild.data
 
+        };
+        elements.push({
+            element
         });
-
-}
-function get() {
-    fetch("./php/get.php").then(res => res.json()).then(res => {
-        Merch = res;
-        Merch.forEach(product => {
-            it++;
-            if (it < 5) {
-                art = `
-        <div id="top" class="card-body">
-           
-                <a class='add'><img height="120" width="120" src="${product.picture}" alt="${product.name}"></a>
-           
-        </div>
-        `;
-                box.innerHTML += art;
+        const url = './php/post.php';
+        const options = {
+            method: 'POST',
+            body: 'Hola mundo',
+            headers: {
+                'Content-Type': 'application/json'
             }
-            card = `
-        <div class=" mb-4 shadow-sm">
-            <div id="card-header" class="">
-                <h4 class="my-0 font-weight-normal">${product.name}</h4>
-            </div>
-            <div class="card-body">
-                <a class='add'> <img height="240" width="240" src="${product.picture}" alt="${product.name}" ></a>
-                    <p>${product.price} pesos</p>
-            </div>
-        </div>
-        `;
-            candyDeck.innerHTML += card;
-        });
+        };
+        fetch(
+            url,
+            options
+        )
+            .then((response) => response.json())
+            .then((res) => console.log(res))
+            .catch((err) => console.error('error', err));
 
-    })
+
+    }
+
+
+
+
 }
